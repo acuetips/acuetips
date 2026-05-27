@@ -1,14 +1,19 @@
-import { contactInfo } from "@/data/contact";
+"use client";
+
+import { contactData } from "@/data/contact";
+import { useLocale } from "@/i18n/LocaleProvider";
 
 export function SiteFooter() {
-  const { address, email, phone } = contactInfo;
+  const { dict } = useLocale();
+  const { email, phone } = contactData;
+  const { contact } = dict;
 
   return (
     <footer className="site-footer">
       <div className="site-footer__brand">
-        <p className="site-footer__name">acuetips.com</p>
-        <p>{address.venue}</p>
-        <p>{address.line}</p>
+        <p className="site-footer__name">{dict.common.brandName}</p>
+        <p>{contact.venue}</p>
+        <p>{contact.addressLine}</p>
       </div>
       <div className="site-footer__contact">
         <p>

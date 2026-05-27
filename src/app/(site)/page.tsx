@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { InstantButton } from "@/components/InstantButton";
-import { products } from "@/data/products";
+import { getProducts } from "@/data/products";
+import { getLocale } from "@/i18n/get-locale";
 import { routes } from "@/lib/routes";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const locale = await getLocale();
+  const products = getProducts(locale);
+
   return (
     <main className="page-home">
       <section className="product-list">

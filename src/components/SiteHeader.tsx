@@ -3,13 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { LocaleSwitcher } from "@/components/LocaleSwitcher";
+import { useLocale } from "@/i18n/LocaleProvider";
 import { routes } from "@/lib/routes";
-
-const navItems = [
-  { href: routes.home, label: "home" },
-  { href: routes.about, label: "about" },
-  { href: routes.contact, label: "contact" },
-] as const;
 
 const STICKY_THRESHOLD_MIN = 80;
 const ENTER_OFFSET = 16;
@@ -18,6 +14,7 @@ const SCROLL_BUFFER = 32;
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const { dict } = useLocale();
   const headerRef = useRef<HTMLElement>(null);
   const thresholdRef = useRef(120);
   const expandedHeightRef = useRef(0);
@@ -25,6 +22,12 @@ export function SiteHeader() {
   const [mounted, setMounted] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [placeholderHeight, setPlaceholderHeight] = useState(0);
+
+  const navItems = [
+    { href: routes.home, label: dict.nav.home },
+    { href: routes.about, label: dict.nav.about },
+    { href: routes.contact, label: dict.nav.contact },
+  ] as const;
 
   useEffect(() => {
     setMounted(true);
@@ -109,11 +112,11 @@ export function SiteHeader() {
             <img
               className="site-logo__image"
               src="/logo.png"
-              alt="acuetips"
+              alt={dict.common.brandAlt}
               decoding="async"
             />
           </Link>
-          <nav className="site-nav" aria-label="Main">
+          <nav className="site-nav" aria-label={dict.nav.mainAria}>
             {navItems.map(({ href, label }) => (
               <Link
                 key={href}
@@ -124,6 +127,7 @@ export function SiteHeader() {
                 {label}
               </Link>
             ))}
+            <LocaleSwitcher />
           </nav>
         </div>
       </header>

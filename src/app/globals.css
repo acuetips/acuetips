@@ -595,6 +595,43 @@ button, h1, h2, h3, h4, h5, h6, li, ol, p {
   text-underline-offset: 0.25em;
 }
 
+.locale-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+}
+
+.locale-switcher__btn {
+  color: var(--color-text-muted);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.locale-switcher__btn:hover,
+.locale-switcher__btn.is-active {
+  color: var(--color-accent);
+}
+
+.locale-switcher__btn:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.locale-switcher__sep {
+  color: var(--color-border);
+  user-select: none;
+}
+
+.site-header.is-sticky .locale-switcher {
+  margin-left: 0;
+}
+
 /* ── 首頁商品列表 ── */
 
 .product-list {

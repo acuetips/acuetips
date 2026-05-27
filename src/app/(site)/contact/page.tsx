@@ -1,36 +1,45 @@
 import type { Metadata } from "next";
-import { contactInfo } from "@/data/contact";
+import { contactData } from "@/data/contact";
+import { getDictionary } from "@/i18n/get-dictionary";
+import { getLocale } from "@/i18n/get-locale";
 
-export const metadata: Metadata = {
-  title: "contact — acuetips.com",
-  description: "聯絡 A CUE TIPS — 楠梓PRO撞球運動館。",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
 
-export default function ContactPage() {
-  const { address, hours, email, phone } = contactInfo;
+  return {
+    title: dict.meta.contactTitle,
+    description: dict.meta.contactDescription,
+  };
+}
+
+export default async function ContactPage() {
+  const dict = getDictionary(await getLocale());
+  const { contact } = dict;
+  const { email, phone } = contactData;
 
   return (
     <main className="page-contact">
       <article className="contact-content">
         <header className="contact-head">
-          <h1 className="contact-title">聯絡我們</h1>
+          <h1 className="contact-title">{contact.title}</h1>
         </header>
 
         <div className="contact-grid">
           <section className="contact-block">
-            <h2 className="contact-block__label">{address.label}</h2>
-            <p className="contact-block__text">{address.venue}</p>
-            <p className="contact-block__text">{address.line}</p>
+            <h2 className="contact-block__label">{contact.addressLabel}</h2>
+            <p className="contact-block__text">{contact.venue}</p>
+            <p className="contact-block__text">{contact.addressLine}</p>
           </section>
 
           <section className="contact-block">
-            <h2 className="contact-block__label">{hours.label}</h2>
-            <p className="contact-block__text">{hours.weekday}</p>
-            <p className="contact-block__text">{hours.weekend}</p>
+            <h2 className="contact-block__label">{contact.hoursLabel}</h2>
+            <p className="contact-block__text">{contact.weekdayHours}</p>
+            <p className="contact-block__text">{contact.weekendHours}</p>
           </section>
 
           <section className="contact-block">
-            <h2 className="contact-block__label">{email.label}</h2>
+            <h2 className="contact-block__label">{contact.emailLabel}</h2>
             <p className="contact-block__text">
               <a href={email.href} className="contact-link">
                 {email.value}
@@ -39,7 +48,7 @@ export default function ContactPage() {
           </section>
 
           <section className="contact-block">
-            <h2 className="contact-block__label">{phone.label}</h2>
+            <h2 className="contact-block__label">{contact.phoneLabel}</h2>
             <p className="contact-block__text">
               <a href={phone.mobileHref} className="contact-link">
                 {phone.mobile}

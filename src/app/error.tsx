@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
+import { useLocale } from "@/i18n/LocaleProvider";
 import { routes } from "@/lib/routes";
 
 export default function Error({
@@ -11,20 +12,22 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const { dict } = useLocale();
+
   useEffect(() => {
     console.error(error);
   }, [error]);
 
   return (
     <main className="page-error">
-      <h1 className="page-error__title">發生錯誤</h1>
-      <p className="page-error__message">頁面載入失敗，請再試一次。</p>
+      <h1 className="page-error__title">{dict.errors.errorTitle}</h1>
+      <p className="page-error__message">{dict.errors.errorMessage}</p>
       <div className="page-error__actions">
         <button type="button" className="page-error__button" onClick={reset}>
-          重試
+          {dict.common.retry}
         </button>
         <Link href={routes.home} className="page-error__link">
-          回到首頁
+          {dict.common.backHome}
         </Link>
       </div>
     </main>

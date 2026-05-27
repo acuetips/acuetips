@@ -1,13 +1,18 @@
 import Link from "next/link";
+import { getDictionary } from "@/i18n/get-dictionary";
+import { getLocale } from "@/i18n/get-locale";
 import { routes } from "@/lib/routes";
 
-export default function SiteNotFound() {
+export default async function SiteNotFound() {
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
+
   return (
     <main className="page-error">
-      <h1 className="page-error__title">404</h1>
-      <p className="page-error__message">找不到這個頁面。</p>
+      <h1 className="page-error__title">{dict.errors.notFoundTitle}</h1>
+      <p className="page-error__message">{dict.errors.notFoundMessage}</p>
       <Link href={routes.home} className="page-error__link">
-        回到首頁
+        {dict.common.backHome}
       </Link>
     </main>
   );

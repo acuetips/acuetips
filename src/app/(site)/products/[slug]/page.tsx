@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getProductBySlug, products } from "@/data/products";
+import {
+  getProductBySlug,
+  productSlugs,
+} from "@/data/products";
+import { getDictionary } from "@/i18n/get-dictionary";
+import { getLocale } from "@/i18n/get-locale";
 
 export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
+  return productSlugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -12,8 +17,11 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
-  if (!product) return { title: "acuetips.com" };
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
+  const product = getProductBySlug(slug, locale);
+
+  if (!product) return { title: dict.meta.siteTitle };
 
   return {
     title: `${product.name} — acuetips.com`,
@@ -27,8 +35,13 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
+  const product = getProductBySlug(slug, locale);
+
   if (!product) notFound();
+
+  const specLabels = dict.products.specLabels;
 
   return (
     <main className="page-product">
@@ -58,11 +71,11 @@ export default async function ProductPage({
           )}
 
           <dl className="product-detail__specs">
-            <dt>sku</dt>
+            <dt>{specLabels.sku}</dt>
             <dd>{product.specs.sku}</dd>
-            <dt>category</dt>
+            <dt>{specLabels.category}</dt>
             <dd>{product.specs.category}</dd>
-            <dt>options</dt>
+            <dt>{specLabels.options}</dt>
             <dd>{product.specs.options}</dd>
           </dl>
         </div>

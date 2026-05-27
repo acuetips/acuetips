@@ -22,15 +22,11 @@ export default async function ProductPage({
       </Link>
 
       <div className="product-detail">
-        <div className="product-detail__gallery">
-          {product.images.map((src, i) => (
-            <img
-              key={i}
-              src={src}
-              alt={`${product.name} ${i + 1}`}
-            />
-          ))}
-        </div>
+        <img
+          className="product-detail__hero"
+          src={product.images[0]}
+          alt={product.name}
+        />
 
         <div className="product-detail__info">
           <h1 className="product-detail__title">

@@ -18,7 +18,7 @@ export default function HomePage() {
         </div>
         <nav className="site-nav">
           <Link href="/">home</Link>
-          <Link href="#about">about</Link>
+          <Link href="/about">about</Link>
         </nav>
       </header>
 
@@ -46,7 +46,7 @@ export default function HomePage() {
         ))}
       </section>
 
-      <footer className="site-footer" id="about">
+      <footer className="site-footer">
         <div>
           <p>© GOD OF CUE TIP</p>
           <p>Kaohsiung, TW</p>

@@ -12,79 +12,94 @@ const navItems = [
 ] as const;
 
 const STICKY_THRESHOLD_MIN = 80;
+const ENTER_OFFSET = 16;
+const EXIT_OFFSET = 16;
+const SCROLL_BUFFER = 32;
 
 export function SiteHeader() {
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
   const thresholdRef = useRef(120);
+  const expandedHeightRef = useRef(0);
+  const isStickyRef = useRef(false);
   const [mounted, setMounted] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
-  const [spacerHeight, setSpacerHeight] = useState(0);
+  const [placeholderHeight, setPlaceholderHeight] = useState(0);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   useEffect(() => {
+    isStickyRef.current = isSticky;
+  }, [isSticky]);
+
+  useEffect(() => {
+    setIsSticky(false);
+  }, [pathname]);
+
+  useEffect(() => {
     if (!mounted) return;
 
-    const measureThreshold = () => {
-      if (headerRef.current) {
-        thresholdRef.current = Math.max(
-          STICKY_THRESHOLD_MIN,
-          Math.round(headerRef.current.offsetHeight * 0.85),
-        );
-      }
+    const measureExpanded = () => {
+      if (isStickyRef.current || !headerRef.current) return;
+
+      const height = headerRef.current.offsetHeight;
+      expandedHeightRef.current = height;
+      thresholdRef.current = Math.max(
+        STICKY_THRESHOLD_MIN,
+        Math.round(height * 0.85),
+      );
     };
 
-    measureThreshold();
-    window.addEventListener("resize", measureThreshold);
+    const canScroll = () =>
+      document.documentElement.scrollHeight >
+      window.innerHeight + thresholdRef.current + SCROLL_BUFFER;
 
     const onScroll = () => {
-      const shouldStick = window.scrollY > thresholdRef.current;
+      if (!canScroll()) {
+        setIsSticky(false);
+        return;
+      }
+
+      const y = window.scrollY;
+      const threshold = thresholdRef.current;
 
       setIsSticky((prev) => {
-        if (shouldStick && !prev && headerRef.current) {
-          setSpacerHeight(headerRef.current.offsetHeight);
+        if (!prev && y > threshold + ENTER_OFFSET) {
+          const height =
+            expandedHeightRef.current || headerRef.current?.offsetHeight || 0;
+          if (height > 0) setPlaceholderHeight(height);
+          return true;
         }
-        return shouldStick;
+        if (prev && y < threshold - EXIT_OFFSET) return false;
+        return prev;
       });
     };
 
+    const onResize = () => {
+      measureExpanded();
+      onScroll();
+    };
+
+    measureExpanded();
     onScroll();
+
+    window.addEventListener("resize", onResize);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
+      window.removeEventListener("resize", onResize);
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", measureThreshold);
     };
   }, [mounted, pathname]);
-
-  useEffect(() => {
-    if (!mounted || isSticky) return;
-
-    const measure = () => {
-      if (headerRef.current) {
-        setSpacerHeight(headerRef.current.offsetHeight);
-      }
-    };
-
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, [mounted, isSticky, pathname]);
 
   const stickyActive = mounted && isSticky;
 
   return (
-    <div className="site-header-group">
-      {stickyActive && (
-        <div
-          className="site-header-spacer"
-          style={{ height: spacerHeight }}
-          aria-hidden="true"
-        />
-      )}
-
+    <div
+      className="site-header-group"
+      style={stickyActive ? { minHeight: placeholderHeight } : undefined}
+    >
       <header
         ref={headerRef}
         className={`site-header${stickyActive ? " is-sticky" : ""}`}

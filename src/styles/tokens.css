@@ -1,30 +1,38 @@
 :root {
-  /* 色彩 — 黑色主題 */
+  /* 色彩 */
   --color-bg: #000000;
   --color-text: #fdfdfd;
-  --color-text-muted: rgba(253, 253, 253, 0.55);
-  --color-accent: #ee9948;
-  --color-border: rgba(253, 253, 253, 0.08);
-  --text-stroke: 1px #fdfdfd;
+  --color-text-muted: rgba(253, 253, 253, 0.58);
+  --color-text-faint: rgba(253, 253, 253, 0.38);
+  --color-accent: #ef920e;
+  --color-border: rgba(253, 253, 253, 0.1);
+  --color-border-strong: rgba(253, 253, 253, 0.16);
 
   /* 字型 */
-  --font-body: var(--font-gnuhr), "Courier New", Courier, monospace;
-  --font-size-base: 12px;
-  --font-size-sm: 11px;
-  --font-size-uppercase: 16px;
-  --font-size-uppercase-sm: 13px;
-  --font-size-logo: clamp(1.5rem, 8.5vw, 6rem);
-  --spacing-logo-gap: clamp(1.5rem, 4.5vw, 2.75rem);
+  --font-ui: var(--font-noto), "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-mono: var(--font-gnuhr), "Courier New", Courier, monospace;
+  --font-display: var(--font-logo), var(--font-ui), sans-serif;
+
+  --font-size-base: 15px;
+  --font-size-sm: 13px;
+  --font-size-xs: 12px;
+  --font-size-lg: 17px;
+  --font-size-xl: 20px;
+  --font-size-label: 13px;
+  --font-size-heading: clamp(1.25rem, 3vw, 1.5rem);
+  --font-size-display: clamp(1.75rem, 5vw, 2.5rem);
 
   /* 間距 */
   --spacing-page-x: clamp(1.25rem, 5vw, 4rem);
-  --spacing-row-y: clamp(1rem, 2.5vh, 1.5rem);
-  --spacing-logo-top: clamp(1.25rem, 4vh, 2.5rem);
+  --spacing-section-top: clamp(1.25rem, 4vh, 2rem);
+  --spacing-section: clamp(2.5rem, 6vh, 4rem);
+  --spacing-block: clamp(1rem, 2.5vh, 1.5rem);
+  --spacing-logo-top: clamp(1rem, 3vh, 1.75rem);
 
-  /* 商品列 */
-  --product-thumb-size: 96px;
-  --product-thumb-height: 120px;
+  /* 商品 */
+  --product-thumb-size: clamp(120px, 28vw, 168px);
 
-  /* 動畫 */
+  /* 動效 */
   --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
 }

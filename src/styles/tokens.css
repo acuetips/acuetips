@@ -1,0 +1,30 @@
+:root {
+  /* 色彩 — 黑色主題 */
+  --color-bg: #000000;
+  --color-text: #fdfdfd;
+  --color-text-muted: rgba(253, 253, 253, 0.55);
+  --color-accent: #ee9948;
+  --color-border: rgba(253, 253, 253, 0.08);
+  --text-stroke: 1px #fdfdfd;
+
+  /* 字型 */
+  --font-body: var(--font-gnuhr), "Courier New", Courier, monospace;
+  --font-size-base: 12px;
+  --font-size-sm: 11px;
+  --font-size-uppercase: 16px;
+  --font-size-uppercase-sm: 13px;
+  --font-size-logo: clamp(1.5rem, 8.5vw, 6rem);
+  --spacing-logo-gap: clamp(1.5rem, 4.5vw, 2.75rem);
+
+  /* 間距 */
+  --spacing-page-x: clamp(1.25rem, 5vw, 4rem);
+  --spacing-row-y: clamp(1rem, 2.5vh, 1.5rem);
+  --spacing-logo-top: clamp(1.25rem, 4vh, 2.5rem);
+
+  /* 商品列 */
+  --product-thumb-size: 96px;
+  --product-thumb-height: 120px;
+
+  /* 動畫 */
+  --transition-fast: 0.2s ease;
+}

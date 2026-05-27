@@ -1,0 +1,418 @@
+@import "tailwindcss";
+
+@import "../styles/tokens.css";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke: var(--text-stroke);
+  overscroll-behavior-y: none;
+  min-height: 100svh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button, h1, h2, h3, h4, h5, h6, li, ol, p {
+  font-family: var(--font-body);
+  -webkit-text-stroke: var(--text-stroke);
+}
+
+/* ── 頁面 ── */
+
+.page-home {
+  min-height: 100svh;
+  padding: 0 var(--spacing-page-x);
+  display: flex;
+  flex-direction: column;
+}
+
+.page-product {
+  min-height: 100svh;
+  padding: var(--spacing-page-x);
+}
+
+/* ── Header ── */
+
+.site-header {
+  padding-top: var(--spacing-logo-top);
+  text-align: center;
+  margin-bottom: clamp(1rem, 2vh, 1.5rem);
+}
+
+.site-header__title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-logo-gap);
+  min-width: 0;
+}
+
+.site-logo__image {
+  width: clamp(64px, 16vw, 100px);
+  height: clamp(64px, 16vw, 100px);
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.site-logo__image--animated {
+  animation: logo-color-shift 10s ease-in-out infinite;
+}
+
+@keyframes logo-color-shift {
+  0% {
+    filter: hue-rotate(0deg) saturate(1.1);
+  }
+  20% {
+    filter: hue-rotate(80deg) saturate(1.35);
+  }
+  40% {
+    filter: hue-rotate(160deg) saturate(0.95);
+  }
+  60% {
+    filter: hue-rotate(240deg) saturate(1.25);
+  }
+  80% {
+    filter: hue-rotate(300deg) saturate(1.15);
+  }
+  100% {
+    filter: hue-rotate(360deg) saturate(1.1);
+  }
+}
+
+.site-logo {
+  font-family: var(--font-logo), sans-serif;
+  font-size: var(--font-size-logo);
+  font-weight: 400;
+  letter-spacing: var(--letter-spacing-logo);
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  -webkit-text-stroke: 0;
+}
+
+.site-header__embed {
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+}
+
+/* myinstants 風格紅色按鈕 */
+.instant-btn {
+  position: relative;
+  width: 94px;
+  height: 94px;
+  flex-shrink: 0;
+}
+
+.instant-btn--floating {
+  position: fixed;
+  right: clamp(1rem, 3vw, 1.5rem);
+  bottom: clamp(1rem, 3vh, 1.5rem);
+  z-index: 20;
+  transform: scale(0.72);
+  transform-origin: bottom right;
+  opacity: 0.9;
+}
+
+.instant-btn--floating:hover {
+  opacity: 1;
+}
+
+.instant-btn__shadow {
+  position: absolute;
+  inset: 0;
+  width: 94px;
+  height: 89px;
+  background: url("https://www.myinstants.com/media/images/transparent_button_small_shadow.png")
+    no-repeat;
+  pointer-events: none;
+}
+
+.instant-btn__bg {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 86px;
+  height: 84px;
+  border-radius: 50%;
+  background-color: #ff0000;
+  pointer-events: none;
+}
+
+.instant-btn__button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 94px;
+  height: 89px;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background: url("https://www.myinstants.com/media/images/transparent_button_small_sprite.png")
+    -5px -5px no-repeat;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.instant-btn__button.is-pressed,
+.instant-btn__button:active {
+  background-position: -109px -5px;
+}
+
+.site-tagline {
+  margin-top: 1rem;
+  font-size: var(--font-size-uppercase-sm);
+  color: var(--color-text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  -webkit-text-stroke: 0;
+}
+
+.site-nav {
+  margin-top: 1rem;
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  font-size: var(--font-size-base);
+}
+
+.site-nav a {
+  transition: opacity var(--transition-fast);
+}
+
+.site-nav a:hover {
+  opacity: 0.5;
+}
+
+/* ── 商品列表 ── */
+
+.product-list {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid var(--color-border);
+  border-left: 1px solid var(--color-border);
+}
+
+.product-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: var(--spacing-row-y) clamp(1rem, 2vw, 1.5rem);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  transition: opacity var(--transition-fast);
+  cursor: pointer;
+  min-height: clamp(140px, 22vh, 200px);
+}
+
+.product-row:hover {
+  opacity: 0.65;
+}
+
+.product-row__info {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: var(--font-size-uppercase);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.product-row__index {
+  color: var(--color-text-muted);
+  min-width: 1.5rem;
+}
+
+.product-row__name {
+  font-weight: 400;
+}
+
+.product-row__variant {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  margin-left: 0.5rem;
+  text-transform: lowercase;
+  -webkit-text-stroke: 0;
+}
+
+.product-row__thumb {
+  flex-shrink: 0;
+  width: var(--product-thumb-size);
+  height: var(--product-thumb-height);
+  overflow: hidden;
+}
+
+.product-row__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: lighten;
+  filter: grayscale(30%) contrast(1.1);
+}
+
+/* ── Footer ── */
+
+.site-footer {
+  padding: clamp(3rem, 8vh, 5rem) 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  -webkit-text-stroke: 0;
+}
+
+.site-footer__contact {
+  text-align: right;
+  line-height: 1.6;
+}
+
+/* ── 商品詳情頁 ── */
+
+.back-link {
+  display: inline-block;
+  margin-bottom: clamp(2rem, 5vh, 4rem);
+  font-size: var(--font-size-base);
+  opacity: 0.5;
+  transition: opacity var(--transition-fast);
+  text-transform: lowercase;
+}
+
+.back-link:hover {
+  opacity: 1;
+}
+
+.product-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.product-detail__gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.product-detail__gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  mix-blend-mode: lighten;
+  filter: grayscale(20%) contrast(1.05);
+}
+
+.product-detail__info {
+  padding-top: 1rem;
+}
+
+.product-detail__title {
+  font-size: var(--font-size-uppercase);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 2rem;
+}
+
+.product-detail__hardness {
+  font-size: var(--font-size-uppercase-sm);
+  color: var(--color-accent);
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  -webkit-text-stroke: 0;
+}
+
+.color-list {
+  list-style: none;
+  margin-bottom: 2.5rem;
+}
+
+.color-list li {
+  font-size: var(--font-size-base);
+  color: var(--color-text-muted);
+  margin-bottom: 0.3rem;
+  text-transform: lowercase;
+  -webkit-text-stroke: 0;
+}
+
+.color-list li::before {
+  content: "• ";
+  color: var(--color-text);
+}
+
+.product-detail__description {
+  line-height: 2;
+  max-width: 42ch;
+  color: var(--color-text-muted);
+  -webkit-text-stroke: 0;
+  margin-bottom: 2.5rem;
+}
+
+.product-detail__specs {
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.5rem;
+}
+
+.product-detail__specs dt {
+  font-size: var(--font-size-uppercase-sm);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+  -webkit-text-stroke: 0;
+}
+
+.product-detail__specs dd {
+  font-size: var(--font-size-base);
+  margin-bottom: 1rem;
+  margin-left: 0;
+}
+
+/* ── 響應式 ── */
+
+@media (max-width: 768px) {
+  .product-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .product-list {
+    grid-template-columns: 1fr;
+  }
+
+  .product-row {
+    min-height: auto;
+  }
+
+  .product-row__variant {
+    display: none;
+  }
+
+  .site-footer {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .site-footer__contact {
+    text-align: left;
+  }
+}

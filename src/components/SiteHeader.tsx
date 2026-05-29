@@ -2,22 +2,26 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 import { useLocale } from "@/i18n/LocaleProvider";
 import { routes } from "@/lib/routes";
 
-const STICKY_ENTER_Y = 12;
-const STICKY_EXIT_Y = 4;
+const STICKY_THRESHOLD_MIN = 80;
+const ENTER_OFFSET = 16;
+const EXIT_OFFSET = 16;
+const SCROLL_BUFFER = 32;
 
 export function SiteHeader() {
   const pathname = usePathname();
   const { dict } = useLocale();
-  const groupRef = useRef<HTMLDivElement>(null);
-  const spacerRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
+  const thresholdRef = useRef(120);
+  const expandedHeightRef = useRef(0);
   const isStickyRef = useRef(false);
+  const [mounted, setMounted] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const [placeholderHeight, setPlaceholderHeight] = useState(0);
 
   const navItems = [
     { href: routes.home, label: dict.nav.home },
@@ -25,99 +29,92 @@ export function SiteHeader() {
     { href: routes.contact, label: dict.nav.contact },
   ] as const;
 
-  const syncHeaderMetrics = () => {
-    if (!groupRef.current || isStickyRef.current) return;
-
-    const height = groupRef.current.offsetHeight;
-    document.documentElement.style.setProperty(
-      "--site-header-offset",
-      `${height}px`,
-    );
-  };
-
-  const setStickyState = (next: boolean) => {
-    const header = headerRef.current;
-    const spacer = spacerRef.current;
-    const group = groupRef.current;
-    if (!header || !spacer || !group) return;
-
-    if (next === isStickyRef.current) return;
-
-    if (next) {
-      const height = group.offsetHeight;
-      spacer.style.height = `${height}px`;
-      header.classList.add("is-sticky");
-      document.documentElement.style.setProperty(
-        "--site-header-offset",
-        `${height}px`,
-      );
-    } else {
-      header.classList.remove("is-sticky");
-      spacer.style.height = "0px";
-      syncHeaderMetrics();
-    }
-
-    isStickyRef.current = next;
-    setIsSticky(next);
-  };
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
-    setStickyState(false);
+    isStickyRef.current = isSticky;
+  }, [isSticky]);
+
+  useEffect(() => {
+    setIsSticky(false);
   }, [pathname]);
 
-  useLayoutEffect(() => {
-    syncHeaderMetrics();
+  useEffect(() => {
+    if (!mounted) return;
+
+    const measureExpanded = () => {
+      if (isStickyRef.current || !headerRef.current) return;
+
+      const height = headerRef.current.offsetHeight;
+      expandedHeightRef.current = height;
+      thresholdRef.current = Math.max(
+        STICKY_THRESHOLD_MIN,
+        Math.round(height * 0.85),
+      );
+    };
+
+    const canScroll = () =>
+      document.documentElement.scrollHeight >
+      window.innerHeight + thresholdRef.current + SCROLL_BUFFER;
 
     const onScroll = () => {
-      const y = window.scrollY;
-      const shouldStick = isStickyRef.current
-        ? y > STICKY_EXIT_Y
-        : y > STICKY_ENTER_Y;
+      if (!canScroll()) {
+        setIsSticky(false);
+        return;
+      }
 
-      setStickyState(shouldStick);
+      const y = window.scrollY;
+      const threshold = thresholdRef.current;
+
+      setIsSticky((prev) => {
+        if (!prev && y > threshold + ENTER_OFFSET) {
+          const height =
+            expandedHeightRef.current || headerRef.current?.offsetHeight || 0;
+          if (height > 0) setPlaceholderHeight(height);
+          return true;
+        }
+        if (prev && y < threshold - EXIT_OFFSET) return false;
+        return prev;
+      });
     };
 
     const onResize = () => {
-      if (isStickyRef.current && spacerRef.current && headerRef.current) {
-        const height = headerRef.current.offsetHeight;
-        spacerRef.current.style.height = `${height}px`;
-        document.documentElement.style.setProperty(
-          "--site-header-offset",
-          `${height}px`,
-        );
-      } else {
-        syncHeaderMetrics();
-      }
+      measureExpanded();
+      onScroll();
     };
 
+    measureExpanded();
     onScroll();
 
-    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
+      window.removeEventListener("scroll", onScroll);
     };
-  }, [pathname]);
+  }, [mounted, pathname]);
+
+  const stickyActive = mounted && isSticky;
 
   return (
-    <div ref={groupRef} className="site-header-group">
-      <div
-        ref={spacerRef}
-        className="site-header-spacer"
-        aria-hidden="true"
-      />
-      <header ref={headerRef} className={`site-header${isSticky ? " is-sticky" : ""}`}>
+    <div
+      className="site-header-group"
+      style={stickyActive ? { minHeight: placeholderHeight } : undefined}
+    >
+      <header
+        ref={headerRef}
+        className={`site-header${stickyActive ? " is-sticky" : ""}`}
+      >
         <div className="site-header__inner">
           <Link href={routes.home} className="site-header__title">
-            <span className="site-logo__slot">
-              <img
-                className="site-logo__image"
-                src="/logo.png"
-                alt={dict.common.brandAlt}
-                decoding="async"
-              />
-            </span>
+            <img
+              className="site-logo__image"
+              src="/logo.png"
+              alt={dict.common.brandAlt}
+              decoding="async"
+            />
           </Link>
           <nav className="site-nav" aria-label={dict.nav.mainAria}>
             {navItems.map(({ href, label }) => (

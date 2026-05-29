@@ -405,7 +405,7 @@ button, h1, h2, h3, h4, h5, h6, li, ol, p {
     max-width: none;
     margin: 0;
     position: sticky;
-    top: var(--site-header-offset, 7.5rem);
+    top: 4.5rem;
   }
 
   .about-story__copy {
@@ -466,11 +466,6 @@ button, h1, h2, h3, h4, h5, h6, li, ol, p {
   position: relative;
 }
 
-.site-header-spacer {
-  height: 0;
-  pointer-events: none;
-}
-
 .site-header {
   padding-top: var(--spacing-logo-top);
   text-align: center;
@@ -489,19 +484,19 @@ button, h1, h2, h3, h4, h5, h6, li, ol, p {
   left: 0;
   right: 0;
   z-index: 50;
-  min-height: var(--site-header-offset);
+  padding-top: 0;
   margin-bottom: 0;
-  background: rgba(0, 0, 0, 0.75);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+  text-align: left;
+  background: rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  backdrop-filter: blur(16px) saturate(1.15);
 }
 
 .site-header.is-sticky .site-header__inner {
-  padding-inline: var(--spacing-page-x);
-}
-
-.site-header.is-sticky .site-nav {
-  opacity: 0.7;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.625rem var(--spacing-page-x);
 }
 
 @media (min-width: 1024px) {
@@ -512,6 +507,16 @@ button, h1, h2, h3, h4, h5, h6, li, ol, p {
   }
 }
 
+.site-header.is-sticky .site-logo__image {
+  width: 36px;
+  height: 36px;
+}
+
+.site-header.is-sticky .site-nav {
+  margin-top: 0;
+  gap: 1.25rem;
+}
+
 .site-header__title {
   display: inline-flex;
   flex-direction: column;
@@ -520,21 +525,20 @@ button, h1, h2, h3, h4, h5, h6, li, ol, p {
   min-width: 0;
 }
 
-.site-logo__slot {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  flex-shrink: 0;
-}
-
 .site-logo__image {
-  width: 100%;
-  height: 100%;
+  width: clamp(52px, 12vw, 68px);
+  height: clamp(52px, 12vw, 68px);
   aspect-ratio: 1 / 1;
   flex-shrink: 0;
   object-fit: contain;
+  transition: width 0.25s ease, height 0.25s ease;
+}
+
+@media (min-width: 769px) {
+  .site-logo__image {
+    width: clamp(44px, 5vw, 56px);
+    height: clamp(44px, 5vw, 56px);
+  }
 }
 
 .site-logo {
@@ -693,6 +697,11 @@ button, h1, h2, h3, h4, h5, h6, li, ol, p {
   user-select: none;
   line-height: 1;
 }
+
+.site-header.is-sticky .locale-switcher {
+  margin-left: 0;
+}
+
 /* ── 首頁商品列表 ── */
 
 .product-list {
@@ -1108,7 +1117,7 @@ button, h1, h2, h3, h4, h5, h6, li, ol, p {
 
   .product-detail__media {
     position: sticky;
-    top: var(--site-header-offset, 7.5rem);
+    top: 4.5rem;
   }
 
   .product-detail__hero {

@@ -11,9 +11,8 @@ export const messages = {
     contactDescription: "聯絡 A CUE TIPS — 楠梓PRO撞球運動館。",
   },
   nav: {
-    home: "HOME",
-    about: "ABOUT",
-    contact: "CONTACT",
+    about: "關於",
+    contact: "聯絡",
     mainAria: "Main",
   },
   locale: {

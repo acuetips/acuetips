@@ -24,7 +24,6 @@ export function SiteHeader() {
   const [placeholderHeight, setPlaceholderHeight] = useState(0);
 
   const navItems = [
-    { href: routes.home, label: dict.nav.home },
     { href: routes.about, label: dict.nav.about },
     { href: routes.contact, label: dict.nav.contact },
   ] as const;

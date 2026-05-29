@@ -14,9 +14,8 @@ export const messages = {
       "Contact A CUE TIPS — Nanzih PRO Billiards Sports Center.",
   },
   nav: {
-    home: "HOME",
-    about: "ABOUT",
-    contact: "CONTACT",
+    about: "About",
+    contact: "Contact",
     mainAria: "Main",
   },
   locale: {

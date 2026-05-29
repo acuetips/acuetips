@@ -1,4 +1,7 @@
 export const contactData = {
+  social: {
+    instagram: "https://www.instagram.com/acuetips/",
+  },
   email: {
     value: "intorustandblue@gmail.com",
     href: "mailto:intorustandblue@gmail.com",

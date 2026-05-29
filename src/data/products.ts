@@ -9,8 +9,7 @@ export type ProductBase = {
   id: number;
   slug: ProductSlug;
   name: string;
-  variant: string;
-  price: string;
+  price: number;
   sku: string;
   category: string;
   hardness: string;
@@ -34,8 +33,7 @@ const productBases: ProductBase[] = [
     id: 1,
     slug: "classic-a",
     name: "CLASSIC A",
-    variant: "NT$1,000",
-    price: "NT$1,000",
+    price: 1000,
     sku: "acuetips-classic",
     category: "Classic A",
     hardness: "S / M / H",
@@ -51,8 +49,7 @@ const productBases: ProductBase[] = [
     id: 2,
     slug: "premium-a",
     name: "PREMIUM A",
-    variant: "NT$2,000",
-    price: "NT$2,000",
+    price: 2000,
     sku: "acuetips-premium",
     category: "Premium A",
     hardness: "M — Medieum",
@@ -78,6 +75,13 @@ export function getProducts(locale: Locale): Product[] {
       features: [...copy.features],
     };
   });
+}
+
+export function getRelatedProducts(
+  slug: ProductSlug,
+  locale: Locale,
+): Product[] {
+  return getProducts(locale).filter((product) => product.slug !== slug);
 }
 
 export function getProductBySlug(

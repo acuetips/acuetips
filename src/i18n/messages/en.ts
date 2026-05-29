@@ -14,9 +14,9 @@ export const messages = {
       "Contact A CUE TIPS — Nanzih PRO Billiards Sports Center.",
   },
   nav: {
-    home: "home",
-    about: "about",
-    contact: "contact",
+    home: "HOME",
+    about: "ABOUT",
+    contact: "CONTACT",
     mainAria: "Main",
   },
   locale: {
@@ -27,6 +27,9 @@ export const messages = {
   common: {
     brandAlt: "acuetips",
     brandName: "acuetips.com",
+    instagramAria: "acuetips Instagram",
+    copyrightLead: "Copyright ",
+    copyrightTail: "{year} acuetips",
     backHome: "Back to home",
     retry: "Retry",
   },
@@ -39,7 +42,7 @@ export const messages = {
   },
   about: {
     title: "About Us",
-    est: "EST.2021",
+    est: "- EST. 2021",
     heroAlt: "A CUE TIPS",
     intro: [
       "In partnership with \"Young Billiards King\" Chen Ying-chieh, we develop cue tips for the demands of professional competition. Together we spent over three years in repeated testing and refinement.",
@@ -81,6 +84,7 @@ export const messages = {
     phoneLabel: "Phone",
   },
   products: {
+    relatedTitle: "Related",
     specLabels: {
       sku: "sku",
       category: "category",
@@ -88,6 +92,7 @@ export const messages = {
     },
     items: {
       "classic-a": {
+        seriesLabel: "Classic series",
         description:
           "Classic A series with S, M, and H hardness options for different playing styles and control needs.",
         summary:
@@ -99,6 +104,7 @@ export const messages = {
         ],
       },
       "premium-a": {
+        seriesLabel: "Premium series",
         description:
           "Premium A series — an advanced cue tip for players who want higher stability and shot quality.",
         summary:

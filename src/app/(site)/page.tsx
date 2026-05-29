@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { InstantButton } from "@/components/InstantButton";
 import { getProducts } from "@/data/products";
 import { getLocale } from "@/i18n/get-locale";
+import { formatPrice } from "@/lib/format-price";
 import { routes } from "@/lib/routes";
 
 export default async function HomePage() {
@@ -19,9 +19,10 @@ export default async function HomePage() {
           >
             <div className="product-row__info">
               <div className="product-row__head">
-                <span className="product-row__index">{product.id}.</span>
                 <span className="product-row__name">{product.name}</span>
-                <span className="product-row__variant">{product.variant}</span>
+                <span className="product-row__variant">
+                  {formatPrice(product.price)}
+                </span>
               </div>
               <span className="product-row__summary">{product.summary}</span>
             </div>
@@ -36,8 +37,6 @@ export default async function HomePage() {
           </Link>
         ))}
       </section>
-
-      <InstantButton className="instant-btn--floating" />
     </main>
   );
 }

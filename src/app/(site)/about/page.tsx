@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   IconBond,
-  IconCraft,
   IconDurability,
   IconLeather,
 } from "@/components/about/AboutIcons";
@@ -29,7 +28,7 @@ export default async function AboutPage() {
 
   return (
     <main className="page-about">
-      <article className="about-content">
+      <article className="page-content">
         <section className="about-story">
           <div className="about-story__media">
             <img
@@ -42,24 +41,29 @@ export default async function AboutPage() {
           </div>
 
           <div className="about-story__copy">
-            <header className="about-story__head">
-              <h1 className="about-title">{about.title}</h1>
-              <p className="about-est">{about.est}</p>
+            <header className="page-header">
+              <h1 className="page-title">{about.title}</h1>
+              <p className="page-subtitle">{about.est}</p>
             </header>
 
             <div className="about-intro">
-              {about.intro.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+              {about.intro.map((paragraph, index) => (
+                <p
+                  key={paragraph}
+                  className={
+                    index === about.intro.length - 1
+                      ? "about-intro__closing"
+                      : undefined
+                  }
+                >
+                  {paragraph}
+                </p>
               ))}
             </div>
           </div>
         </section>
 
         <section className="about-features" aria-label={about.featuresAria}>
-          <h2 className="about-section-label">
-            <IconCraft className="about-section-label__icon" />
-            {about.craftsmanship}
-          </h2>
           <div className="about-features__grid">
             {about.features.map((feature, index) => {
               const Icon = featureIcons[index];

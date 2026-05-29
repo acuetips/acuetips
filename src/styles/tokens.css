@@ -4,14 +4,16 @@
   --color-text: #fdfdfd;
   --color-text-muted: rgba(253, 253, 253, 0.58);
   --color-text-faint: rgba(253, 253, 253, 0.38);
-  --color-accent: #ef920e;
+  --color-accent: #EE611A;
   --color-border: rgba(253, 253, 253, 0.1);
   --color-border-strong: rgba(253, 253, 253, 0.16);
 
-  /* 字型 */
+  /* 字型：英文 TASA Explorer、中文 Noto Sans TC */
+  --font-en: "TASA Explorer", sans-serif;
   --font-ui: var(--font-noto), "PingFang TC", "Microsoft JhengHei", sans-serif;
-  --font-mono: var(--font-gnuhr), "Courier New", Courier, monospace;
-  --font-display: var(--font-logo), var(--font-ui), sans-serif;
+  --font-body: var(--font-en), var(--font-ui), sans-serif;
+  --font-mono: var(--font-en);
+  --font-display: var(--font-en);
 
   --font-size-base: 15px;
   --font-size-sm: 13px;
@@ -24,6 +26,7 @@
 
   /* 間距 */
   --spacing-page-x: clamp(1.25rem, 5vw, 4rem);
+  --site-max-width: 1200px;
   --spacing-section-top: clamp(1.25rem, 4vh, 2rem);
   --spacing-section: clamp(2.5rem, 6vh, 4rem);
   --spacing-block: clamp(1rem, 2.5vh, 1.5rem);

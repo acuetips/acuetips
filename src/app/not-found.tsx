@@ -10,14 +10,16 @@ export default async function NotFound() {
 
   return (
     <div className="site-shell">
-      <SiteHeader />
-      <main className="page-error">
-        <h1 className="page-error__title">{dict.errors.notFoundTitle}</h1>
-        <p className="page-error__message">{dict.errors.notFoundMessage}</p>
-        <Link href={routes.home} className="page-error__link">
-          {dict.common.backHome}
-        </Link>
-      </main>
+      <div className="site-container">
+        <SiteHeader />
+        <main className="page-error">
+          <h1 className="page-error__title">{dict.errors.notFoundTitle}</h1>
+          <p className="page-error__message">{dict.errors.notFoundMessage}</p>
+          <Link href={routes.home} className="page-error__link">
+            {dict.common.backHome}
+          </Link>
+        </main>
+      </div>
     </div>
   );
 }

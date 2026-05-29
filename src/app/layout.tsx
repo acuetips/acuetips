@@ -1,28 +1,14 @@
 import type { Metadata } from "next";
-import { Acme, IBM_Plex_Mono, Noto_Sans_TC } from "next/font/google";
+import { Noto_Sans_TC } from "next/font/google";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { getLocale } from "@/i18n/get-locale";
 import { LocaleProvider } from "@/i18n/LocaleProvider";
 import "./globals.css";
 
-const gnuhrFont = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-gnuhr",
-  display: "swap",
-});
-
 const uiFont = Noto_Sans_TC({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-noto",
-  display: "swap",
-});
-
-const logoFont = Acme({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-logo",
   display: "swap",
 });
 
@@ -45,10 +31,7 @@ export default async function RootLayout({
   const dict = getDictionary(locale);
 
   return (
-    <html
-      lang={locale}
-      className={`${gnuhrFont.variable} ${uiFont.variable} ${logoFont.variable}`}
-    >
+    <html lang={locale} className={uiFont.variable}>
       <body>
         <LocaleProvider locale={locale} dict={dict}>
           {children}

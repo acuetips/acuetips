@@ -11,9 +11,9 @@ export const messages = {
     contactDescription: "聯絡 A CUE TIPS — 楠梓PRO撞球運動館。",
   },
   nav: {
-    home: "home",
-    about: "about",
-    contact: "contact",
+    home: "HOME",
+    about: "ABOUT",
+    contact: "CONTACT",
     mainAria: "Main",
   },
   locale: {
@@ -24,6 +24,9 @@ export const messages = {
   common: {
     brandAlt: "acuetips",
     brandName: "acuetips.com",
+    instagramAria: "acuetips Instagram",
+    copyrightLead: "Copyright ",
+    copyrightTail: "{year} acuetips",
     backHome: "回到首頁",
     retry: "重試",
   },
@@ -36,7 +39,7 @@ export const messages = {
   },
   about: {
     title: "關於我們",
-    est: "EST.2021",
+    est: "- EST. 2021",
     heroAlt: "A CUE TIPS",
     intro: [
       "品牌與「少年球王」陳英傑合作，針對職業賽場的極致需求進行研發。共同投入了三年多的時間，進行無數次的反覆測試與修正。",
@@ -60,7 +63,7 @@ export const messages = {
       },
     ],
     seriesTitle: "專注研發，實戰淬煉",
-    classicSeriesName: "經典 A 系列",
+    classicSeriesName: "Classic A 系列",
     premiumSeriesName: "Premium A 系列",
     premiumSeriesDesc:
       "M (Medieum)：定義全方位的競技基準。選用法國頂級牛皮，不僅賦予了超越以往的擊球力道與耐用度，更完美保留了細膩的 Q 彈手感與吸附黏著性。力量與精準，自此無需折衷。",
@@ -78,6 +81,7 @@ export const messages = {
     phoneLabel: "聯絡電話",
   },
   products: {
+    relatedTitle: "Related",
     specLabels: {
       sku: "sku",
       category: "category",
@@ -85,6 +89,7 @@ export const messages = {
     },
     items: {
       "classic-a": {
+        seriesLabel: "Classic series",
         description:
           "經典 A 系列，提供 S、M、H 三種硬度選擇，適合不同打法與控球需求。",
         summary: "經典 A 系列，S / M / H 三種硬度，兼顧旋球與控球。",
@@ -95,6 +100,7 @@ export const messages = {
         ],
       },
       "premium-a": {
+        seriesLabel: "Premium series",
         description:
           "Premium A 系列，定位為進階級皮頭選擇，適合追求更高穩定度與擊球質感的玩家。",
         summary: "Premium A 系列，法國頂級牛皮，強調穩定度與擊球質感。",

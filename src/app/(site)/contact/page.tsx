@@ -20,9 +20,9 @@ export default async function ContactPage() {
 
   return (
     <main className="page-contact">
-      <article className="contact-content">
-        <header className="contact-head">
-          <h1 className="contact-title">{contact.title}</h1>
+      <article className="page-content">
+        <header className="page-header">
+          <h1 className="page-title">{contact.title}</h1>
         </header>
 
         <div className="contact-grid">

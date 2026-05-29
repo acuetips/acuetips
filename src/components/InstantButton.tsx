@@ -2,20 +2,24 @@
 
 import { useCallback, useRef, useState } from "react";
 
-const SOUND_URL =
-  "https://www.myinstants.com/media/sounds/fahhh_KcgAXfs.mp3";
+const SOUND_URL = "/sounds/fahhh.mp3";
 
 export function InstantButton({ className }: { className?: string }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [pressed, setPressed] = useState(false);
 
-  const playSound = useCallback(() => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio(SOUND_URL);
-    }
+  const playSound = useCallback(async () => {
+    try {
+      if (!audioRef.current) {
+        audioRef.current = new Audio(SOUND_URL);
+        audioRef.current.preload = "auto";
+      }
 
-    audioRef.current.currentTime = 0;
-    void audioRef.current.play();
+      audioRef.current.currentTime = 0;
+      await audioRef.current.play();
+    } catch (error) {
+      console.error("Failed to play Fahhh sound:", error);
+    }
   }, []);
 
   return (
@@ -26,8 +30,10 @@ export function InstantButton({ className }: { className?: string }) {
         type="button"
         className={`instant-btn__button${pressed ? " is-pressed" : ""}`}
         aria-label="Play Fahhh sound"
-        onClick={playSound}
-        onPointerDown={() => setPressed(true)}
+        onPointerDown={() => {
+          setPressed(true);
+          void playSound();
+        }}
         onPointerUp={() => setPressed(false)}
         onPointerLeave={() => setPressed(false)}
         onBlur={() => setPressed(false)}

@@ -574,7 +574,7 @@ button, h1, h2, h3, h4, h5, h6, li, ol, p {
   right: clamp(0.75rem, 2vw, 1.25rem);
   bottom: clamp(0.75rem, 2vh, 1.25rem);
   z-index: 20;
-  transform: scale(0.266);
+  transform: scale(calc(32 / 94));
   transform-origin: bottom right;
   opacity: 0;
   pointer-events: none;

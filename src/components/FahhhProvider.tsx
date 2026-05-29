@@ -10,6 +10,7 @@ import {
 type FahhhContextValue = {
   isRevealed: boolean;
   reveal: () => void;
+  hide: () => void;
 };
 
 const FahhhContext = createContext<FahhhContextValue | null>(null);
@@ -21,8 +22,12 @@ export function FahhhProvider({ children }: { children: React.ReactNode }) {
     setIsRevealed(true);
   }, []);
 
+  const hide = useCallback(() => {
+    setIsRevealed(false);
+  }, []);
+
   return (
-    <FahhhContext.Provider value={{ isRevealed, reveal }}>
+    <FahhhContext.Provider value={{ isRevealed, reveal, hide }}>
       {children}
     </FahhhContext.Provider>
   );

@@ -4,7 +4,13 @@ import { useCallback, useRef, useState } from "react";
 
 const SOUND_URL = "/sounds/fahhh.mp3";
 
-export function InstantButton({ className }: { className?: string }) {
+export function InstantButton({
+  className,
+  onPress,
+}: {
+  className?: string;
+  onPress?: () => void;
+}) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [pressed, setPressed] = useState(false);
 
@@ -33,6 +39,7 @@ export function InstantButton({ className }: { className?: string }) {
         onPointerDown={() => {
           setPressed(true);
           void playSound();
+          onPress?.();
         }}
         onPointerUp={() => setPressed(false)}
         onPointerLeave={() => setPressed(false)}

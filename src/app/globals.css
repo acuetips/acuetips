@@ -595,8 +595,7 @@ button, h1, h2, h3, h4, h5, h6, li, ol, p {
   inset: 0;
   width: 94px;
   height: 89px;
-  background: url("https://www.myinstants.com/media/images/transparent_button_small_shadow.png")
-    no-repeat;
+  background: url("/instant-btn/shadow.png") no-repeat;
   pointer-events: none;
 }
 
@@ -621,8 +620,7 @@ button, h1, h2, h3, h4, h5, h6, li, ol, p {
   border: 0;
   padding: 0;
   cursor: pointer;
-  background: url("https://www.myinstants.com/media/images/transparent_button_small_sprite.png")
-    -5px -5px no-repeat;
+  background: url("/instant-btn/sprite.png") -5px -5px no-repeat;
   -webkit-tap-highlight-color: transparent;
 }
 

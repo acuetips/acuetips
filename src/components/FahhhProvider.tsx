@@ -6,6 +6,7 @@ import {
   useContext,
   useState,
 } from "react";
+import { preloadInstantButtonAssets } from "@/lib/preload-instant-btn";
 
 type FahhhContextValue = {
   isRevealed: boolean;
@@ -19,7 +20,11 @@ export function FahhhProvider({ children }: { children: React.ReactNode }) {
   const [isRevealed, setIsRevealed] = useState(false);
 
   const reveal = useCallback(() => {
-    setIsRevealed(true);
+    void preloadInstantButtonAssets()
+      .catch(() => undefined)
+      .then(() => {
+        setIsRevealed(true);
+      });
   }, []);
 
   const hide = useCallback(() => {

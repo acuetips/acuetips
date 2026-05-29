@@ -44,11 +44,25 @@ export const messages = {
     title: "About Us",
     est: "- EST. 2021",
     heroAlt: "A CUE TIPS",
-    intro: [
-      "In partnership with \"Young Billiards King\" Chen Ying-chieh, we develop cue tips for the demands of professional competition. Together we spent over three years in repeated testing and refinement.",
-      "We promise a stable, solid feel so every shot gives you honest feedback.",
-      "On the path to excellence, A CUE TIPS is your most reliable support.",
+    introLead: [
+      "A CUE TIPS was born from a simple belief: help players trust their feel again.",
+      "Founder Chen Ying-chieh — the \"Young Billiards King\" — saw through years of competition and coaching that many tips play well when new, but quickly mushroom, go dead, or lose their original response.",
+      "To build a tip that truly meets competitive needs and lasts, he spent over three years in R&D and testing. A tip is the only link between your cue and the cue ball. We focused on leather fiber density and resilience, and through selected materials and pressing methods, A CUE TIPS addresses the mushrooming problem players struggle with most.",
+      "We use premium leather — French top-grain — to improve chalk hold, helping chalk adhere more evenly, reducing miscues at critical moments, and giving you more direct, powerful cueing.",
+      "We keep product choices straightforward — pure feel, clearly graded.",
     ],
+    classicHeading: "The Classic layered series offers three hardness options:",
+    classicOptions: [
+      "S (Soft): Soft Q-feel and grip for excellent spin.",
+      "M (Medium): A solid, full hit — balanced control and power.",
+      "H (Hard): Strong penetration and stability with minimal deflection.",
+    ],
+    introTail: [
+      "For players who want ready-to-play performance, our handcrafted leather tips break in quickly so you can find your rhythm sooner. To us, each tip is more than a consumable — every A CUE TIPS in its refined tin box reflects Chen's commitment to quality.",
+      "We won't promise instant mastery — but we do promise a stable, honest feel so every shot gives you real feedback.",
+    ],
+    introClosing:
+      "On the path to excellence, A CUE TIPS is your most reliable support.",
     craftsmanship: "Craftsmanship",
     featuresAria: "Brand highlights",
     features: [

@@ -47,18 +47,22 @@ export default async function AboutPage() {
             </header>
 
             <div className="about-intro">
-              {about.intro.map((paragraph, index) => (
-                <p
-                  key={paragraph}
-                  className={
-                    index === about.intro.length - 1
-                      ? "about-intro__closing"
-                      : undefined
-                  }
-                >
-                  {paragraph}
-                </p>
+              {about.introLead.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
               ))}
+
+              <p className="about-intro__heading">{about.classicHeading}</p>
+              <ul className="about-list">
+                {about.classicOptions.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+
+              {about.introTail.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+
+              <p className="about-intro__closing">{about.introClosing}</p>
             </div>
           </div>
         </section>

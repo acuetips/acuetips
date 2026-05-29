@@ -211,6 +211,19 @@ button, h1, h2, h3, h4, h5, h6, li, ol, p {
   max-width: 38em;
 }
 
+.about-intro__heading {
+  font-size: var(--font-size-lg);
+  line-height: 1.85;
+  color: var(--color-text-muted);
+  max-width: 38em;
+  margin-top: 0.25rem;
+}
+
+.about-intro .about-list {
+  max-width: 38em;
+  margin: 0.25rem 0 0.5rem;
+}
+
 .about-intro__closing {
   font-size: var(--font-size-xl);
   color: var(--color-text);
@@ -384,7 +397,7 @@ button, h1, h2, h3, h4, h5, h6, li, ol, p {
   .about-story {
     grid-template-columns: minmax(200px, 36%) 1fr;
     grid-template-areas: "media copy";
-    align-items: center;
+    align-items: start;
     gap: clamp(1.5rem, 3vw, 2rem) clamp(2rem, 4vw, 3.5rem);
   }
 

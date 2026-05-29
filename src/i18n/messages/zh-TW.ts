@@ -11,13 +11,14 @@ export const messages = {
     contactDescription: "聯絡 A CUE TIPS — 楠梓PRO撞球運動館。",
   },
   nav: {
+    home: "首頁",
     about: "關於",
     contact: "聯絡",
     mainAria: "Main",
   },
   locale: {
     switchAria: "切換語言",
-    zh: "中文",
+    zh: "中",
     en: "EN",
   },
   common: {

@@ -24,6 +24,7 @@ export function SiteHeader() {
   const [placeholderHeight, setPlaceholderHeight] = useState(0);
 
   const navItems = [
+    { href: routes.home, label: dict.nav.home },
     { href: routes.about, label: dict.nav.about },
     { href: routes.contact, label: dict.nav.contact },
   ] as const;
@@ -115,19 +116,23 @@ export function SiteHeader() {
               decoding="async"
             />
           </Link>
-          <nav className="site-nav" aria-label={dict.nav.mainAria}>
-            {navItems.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className={pathname === href ? "is-active" : undefined}
-                aria-current={pathname === href ? "page" : undefined}
-              >
-                {label}
-              </Link>
-            ))}
-            <LocaleSwitcher />
-          </nav>
+          <div className="site-header__end">
+            <nav className="site-nav" aria-label={dict.nav.mainAria}>
+              {navItems.map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className={pathname === href ? "is-active" : undefined}
+                  aria-current={pathname === href ? "page" : undefined}
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+            <div className="site-header__locale">
+              <LocaleSwitcher />
+            </div>
+          </div>
         </div>
       </header>
     </div>

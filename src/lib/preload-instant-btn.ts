@@ -1,6 +1,6 @@
 const INSTANT_BTN_IMAGES = [
-  "/instant-btn/sprite.png",
-  "/instant-btn/shadow.png",
+  "/instant-btn/fah1.png",
+  "/instant-btn/fah2.png",
 ] as const;
 
 let preloadPromise: Promise<void> | null = null;

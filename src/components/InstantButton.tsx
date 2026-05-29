@@ -3,16 +3,20 @@
 import { useCallback, useRef, useState } from "react";
 
 const SOUND_URL = "/sounds/fahhh.mp3";
+const FAH1_URL = "/instant-btn/fah1.png";
+const FAH2_URL = "/instant-btn/fah2.png";
 
 export function InstantButton({
   className,
   onPress,
+  onAnimationEnd,
 }: {
   className?: string;
   onPress?: () => void;
+  onAnimationEnd?: (event: React.AnimationEvent<HTMLDivElement>) => void;
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [pressed, setPressed] = useState(false);
+  const [activated, setActivated] = useState(false);
 
   const playSound = useCallback(async () => {
     try {
@@ -29,22 +33,27 @@ export function InstantButton({
   }, []);
 
   return (
-    <div className={`instant-btn${className ? ` ${className}` : ""}`}>
-      <div className="instant-btn__shadow" aria-hidden="true" />
-      <div className="instant-btn__bg" aria-hidden="true" />
+    <div
+      className={`instant-btn${className ? ` ${className}` : ""}`}
+      onAnimationEnd={onAnimationEnd}
+    >
       <button
         type="button"
-        className={`instant-btn__button${pressed ? " is-pressed" : ""}`}
+        className="instant-btn__button"
         aria-label="Play Fahhh sound"
         onPointerDown={() => {
-          setPressed(true);
+          setActivated(true);
           void playSound();
           onPress?.();
         }}
-        onPointerUp={() => setPressed(false)}
-        onPointerLeave={() => setPressed(false)}
-        onBlur={() => setPressed(false)}
-      />
+      >
+        <img
+          className="instant-btn__image"
+          src={activated ? FAH2_URL : FAH1_URL}
+          alt=""
+          draggable={false}
+        />
+      </button>
     </div>
   );
 }

@@ -274,7 +274,7 @@ button, h1, h2, h3, h4, h5, h6, li, ol, p {
 .about-feature:hover .about-feature__icon svg {
   animation-play-state: paused;
   transform: translateY(-4px) scale(1.06);
-  filter: drop-shadow(0 0 14px rgba(238, 97, 26, 0.4));
+  filter: drop-shadow(0 0 14px rgba(251, 137, 26, 0.4));
 }
 
 @keyframes about-icon-float {
